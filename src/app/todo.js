@@ -66,6 +66,7 @@ export const Todo = () => {
 
     }
     const Edit = (index) => {
+        setUpdateValue(todo[index])
         todo.splice(index, 1, "")
         setTodo([...todo])
         ssave();
@@ -91,13 +92,11 @@ export const Todo = () => {
         if (e?.length === 0) {
             getlocalData();
         } else {
-            if (e?.length === 1) {
-                setTodo(
-                    todo.filter(x => x.includes(e))
-                )
+            if (e?.length < searchItem?.length) {
+                getlocalData();
             } else {
                 setTodo(
-                    todo.filter(x => x.toLowerCase().includes(e))
+                    todo.filter(x => x.toLowerCase().includes(e)).sort((a,b)=>1*a.localeCompare(b))
                 )
             }
         }
